@@ -10,5 +10,9 @@ namespace hvcp_web_api.Interfaces
 	public interface IDicomstudiesRepository
 	{
 		Dicomstudies GetDicomstudy(int SS_Patient_ID, int SSDICOMStudyID);
+
+		Dicomimages GetDicomimage(int SS_Patient_ID, int SSDICOMStudyID, int SSDICOMImageID);
+
+		string GetImagePath(Dicomimages image);
 	}
 }

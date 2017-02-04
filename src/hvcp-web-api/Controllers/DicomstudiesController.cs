@@ -11,6 +11,7 @@ namespace hvcp_web_api.Controllers
 {
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Linq;
 	using System.Runtime.InteropServices.ComTypes;
 	using System.Threading.Tasks;
@@ -42,7 +43,17 @@ namespace hvcp_web_api.Controllers
 		public IActionResult GetDicomstudy(int ss_patient_id, int id)
 		{
 			var dicomstudy = this.repository.GetDicomstudy(ss_patient_id, id);
-			var result = Mapper.Map<Dicomstudies>(dicomstudy);
+			var result = Mapper.Map<DicomstudyWithChildrenDto>(dicomstudy);
+			return this.Ok(result);
+		}
+
+		[HttpGet("{ss_patient_id}/dicomstudies/{ssdicomstudyid}/dicomimage/{id}", Name = "GetDicomImage")]
+		public IActionResult GetDicomImage(int ss_patient_id, int ssdicomstudyid, int id)
+		{
+			var dicomimage = this.repository.GetDicomimage(ss_patient_id, ssdicomstudyid, id);
+			//var result = Mapper.Map<DicomimageDto>(dicomimage);
+			var result = this.repository.GetImagePath(dicomimage);
+			
 			return this.Ok(result);
 		}
 	}

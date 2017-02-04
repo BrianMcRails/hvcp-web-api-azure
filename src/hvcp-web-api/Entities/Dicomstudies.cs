@@ -38,6 +38,7 @@ namespace hvcp_web_api.Entities
 		[ForeignKey("Ss_Patient_Id")]
 		public Demographics Demographics { get; set; }
 
-
+		public ICollection<Dicomseries> Dicomseries { get; set; }
+			= new List<Dicomseries>();
 	}
 }

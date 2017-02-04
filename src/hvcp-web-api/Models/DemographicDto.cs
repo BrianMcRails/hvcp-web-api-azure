@@ -30,6 +30,6 @@ namespace hvcp_web_api.Models
 		}
 
 		public ICollection<DicomstudyDto> Dicomstudies { get; set; }
-		= new List<DicomstudyDto>();
+			= new List<DicomstudyDto>();
 	}
 }

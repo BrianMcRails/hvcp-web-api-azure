@@ -39,7 +39,7 @@ namespace hvcp_web_api
 	        services.AddMvc();
 			services.AddCors();
 
-	        var connectionString = @"Server=tcp:hvcpwebapi.database.windows.net,1433;Database=hvcpwebapi;Uid=appapollo@hvcpwebapi;Pwd=Lum3dx2016;Encrypt=yes;TrustServerCertificate=no;";
+	        var connectionString = @"Server=tcp:hvcpwebapi.database.windows.net,1433;Database=hvcpwebapi;Uid=;Pwd=;Encrypt=yes;TrustServerCertificate=no;";
 	        services.AddDbContext<StudyInfoContext>(o => o.UseSqlServer(connectionString));
 
 	        services.AddScoped<IDemographicsRepository, DemographicsRepository>();
@@ -58,6 +58,9 @@ namespace hvcp_web_api
 					{
 						cfg.CreateMap<Entities.Demographics, Models.DemographicDto>();
 						cfg.CreateMap<Entities.Dicomstudies, Models.DicomstudyDto>();
+						cfg.CreateMap<Entities.Dicomstudies, Models.DicomstudyWithChildrenDto>();
+						cfg.CreateMap<Entities.Dicomseries, Models.DicomseriesDto>();
+						cfg.CreateMap<Entities.Dicomimages, Models.DicomimageDto>();
 					});
 	        app.UseMvc();
         }

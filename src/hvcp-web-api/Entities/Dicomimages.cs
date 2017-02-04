@@ -5,6 +5,9 @@ namespace hvcp_web_api.Entities
 {
 	using System.ComponentModel.DataAnnotations;
 
+	using Microsoft.EntityFrameworkCore.Metadata.Internal;
+	using System.ComponentModel.DataAnnotations.Schema;
+
 	public partial class Dicomimages
     {
 		[Key]
@@ -44,5 +47,8 @@ namespace hvcp_web_api.Entities
         public string CompressedVolume { get; set; }
         public string SubFolder { get; set; }
         public string Masks { get; set; }
+
+		[ForeignKey("SsdicomseriesId")]
+		public Dicomseries Dicomseries { get; set; }
     }
 }

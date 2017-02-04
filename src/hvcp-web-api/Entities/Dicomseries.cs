@@ -5,6 +5,9 @@ namespace hvcp_web_api.Entities
 {
 	using System.ComponentModel.DataAnnotations;
 
+	using Microsoft.EntityFrameworkCore.Metadata.Internal;
+	using System.ComponentModel.DataAnnotations.Schema;
+
 	public partial class Dicomseries
     {
 		[Key]
@@ -42,5 +45,11 @@ namespace hvcp_web_api.Entities
         public DateTime? ScheduledProcedureStartTime { get; set; }
         public DateTime? PerformedProcedureStepStartDate { get; set; }
         public DateTime? PerformedProcedureStepStartTime { get; set; }
+
+		[ForeignKey("SsdicomstudyId")]
+		public Dicomstudies Dicomstudies { get; set; }
+
+		public ICollection<Dicomimages> Dicomimages { get; set; }
+			= new List<Dicomimages>();
     }
 }
