@@ -51,9 +51,9 @@ namespace hvcp_web_api.Controllers
 		public IActionResult GetDicomImage(int ss_patient_id, int ssdicomstudyid, int id)
 		{
 			var dicomimage = this.repository.GetDicomimage(ss_patient_id, ssdicomstudyid, id);
-			var result = Mapper.Map<DicomimageDto>(dicomimage);
-			// var result = this.repository.GetImagePath(dicomimage);
-			
+			//var result = Mapper.Map<DicomimageDto>(dicomimage);
+			 var result = this.repository.GetImagePath(dicomimage);
+			result = result + ".mp4";
 			return this.Ok(result);
 		}
 	}

@@ -35,11 +35,12 @@ namespace hvcp_web_api.Repositories
 
 		public string GetImagePath(Dicomimages dicomImage)
 		{
+			var dicomseries = this.ctx.Dicomseries.FirstOrDefault(ds => ds.SsdicomseriesId == dicomImage.SsdicomseriesId);
+			var dicomstudy = this.ctx.Dicomstudies.FirstOrDefault(ds => ds.SsdicomstudyId == dicomseries.SsdicomstudyId);
 			var setting =
-				this.ctx.Sssettings.Where(s => s.GroupName == $"CardioPACS\\ArchiveServer\\Settings\\Volumes\\{dicomImage.OriginalVolume}" && s.KeyName == "Path")
-					.FirstOrDefault();
+				this.ctx.Sssettings.FirstOrDefault(s => s.GroupName == $"CardioPACS\\ArchiveServer\\Settings\\Volumes\\{dicomImage.OriginalVolume}" && s.KeyName == "Path");
 			var root = setting.KeyValue;
-			var result = Path.Combine(root, dicomImage.Dicomseries.Dicomstudies.StudyUid, dicomImage.Dicomseries.SeriesUid, dicomImage.ImageUid);
+			var result = Path.Combine(root, dicomstudy.StudyUid, dicomseries.SeriesUid, dicomImage.ImageUid);
 			return result;
 		}
 	}
